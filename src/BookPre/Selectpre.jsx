@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import "./select.css";
+import "./selectstyle.css";
 import { useState,useEffect } from "react";
 
 function Selectpre() {
