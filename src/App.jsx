@@ -5,7 +5,7 @@ import './App.css'
 import {BrowserRouter,Routes,Route} from "react-router-dom"
 import Login from './Login_pages/Login'
 import Movie from './MoviesSection/Movie'
-import TheatreList from './BookPre/ThreatreList'
+import TheatreList from './BookPre/TheatreList'
 import Selectpre from './BookPre/Selectpre'
 import Form from './AddShows/Form'
 
