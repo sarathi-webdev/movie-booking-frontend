@@ -1,0 +1,102 @@
+{
+    "movies" : [
+        {
+            "id": 1,
+            "name" : "Jailer",
+            "image" : "/jailer.jpg"
+        },
+ 
+         {
+            "id": 2,
+            "name" : "Leo",
+            "image" : "/leo.jpg"
+        },
+         {
+            "id": 3,
+            "name" : "JanaNayakan",
+            "image" :"/jana.jpeg"
+        },
+         {
+            "id": 4,
+            "name" : "Goat",
+            "image" :"/goat.jpg"
+        },
+         {
+            "id": 5,
+            "name" : "Mankatha",
+            "image" :"/mankatha.jpg"
+        }
+    ],
+
+    
+    "upcomingmovie" : [
+         {
+            "id": 11,
+            "name" : "Toxic",
+            "image" : "/Toxic-_A_Fairy_Tale_for_Grown-Ups_poster.jpg"
+        },
+         {
+            "id": 12,
+            "name" : "The Paradise",
+            "image" : "/hq720.jpg"
+        },
+         {
+            "id": 13,
+            "name" : "Cars 3",
+            "image" :"/images.jpeg"
+        },
+         {
+            "id": 14,
+            "name" : "Vikram",
+            "image" :"/vikram.jpg"
+        },
+         {
+            "id": 15,
+            "name" : "Moana",
+            "image" :"/images (1).jpeg"
+        }
+    ],
+
+    "theatre": [
+   
+ 
+    {
+      "id": 1,
+      "name": "Border 2",
+      "dates": [
+        {
+          "day" : "FEB",
+          "date": "09",
+          "label": "Mon",
+          "theatres": [
+            {
+              "id": 1,
+              "name": "Cinepolis Grand View High Street, Gurugram",
+              "times": ["10:00 PM", "11:30 PM"]
+            },
+            {
+              "id": 2,
+              "name": "INOX World Mark, Sector 65, Gurugram",
+              "times": ["09:15 PM"]
+            }
+          ]
+        },
+        {
+          "day" : "FEB",
+          "date": "10",
+          "label": "Tue",
+          "theatres": [
+            {
+              "id": 1,
+              "name": "Cinepolis Grand View High Street, Gurugram",
+              "times": ["09:00 PM"]
+            }
+          ]
+        }
+      ]
+    }
+  
+
+ 
+    ]
+}

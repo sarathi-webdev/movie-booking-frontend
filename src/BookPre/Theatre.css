@@ -1,0 +1,99 @@
+/* MAIN WRAPPER */
+.container1 {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+  max-width: 700px;
+  margin: 0 auto;
+
+  
+
+}
+
+
+
+/* THEATRE SHOW CARD */
+.theatreshow {
+  width: 100%;
+  padding:10px;
+
+}
+
+/* DATE BAR */
+.date-bar {
+  display: flex;
+  gap: 10px;
+  padding-bottom: 8px;
+}
+
+.date-box {
+  min-width: 70px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 6px 8px;
+  border: 1px solid #ddd;
+  flex-shrink: 0;
+}
+
+.date-box h5 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.date-box small {
+  display: block;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.date-box.active {
+  background-color: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+/* THEATRE CARD */
+.theatre-card {
+  padding: 10px 0;
+}
+.theatre-cards{
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.theatre-card h6 {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* TIME BUTTONS */
+.time-btn {
+  border: 1px solid #28a745;
+  color: #28a745;
+  margin: 0 8px 8px 0;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.time-btn:hover {
+  background-color: #28a745;
+  color: white;
+}
+
+/* OPTIONAL ICON */
+.heart {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+
+
+
+
+
