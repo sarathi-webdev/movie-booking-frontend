@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import "./theatre.css";
+import "./theatrestyle.css";
 
 function TheatreList() {
   const { id } = useParams(); // movie id from route
