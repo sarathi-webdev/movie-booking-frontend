@@ -176,6 +176,7 @@ function Login() {
               value={formData.username}
               onChange={handleChange}
               autoComplete="off"
+              required
             />
           </div>
 
