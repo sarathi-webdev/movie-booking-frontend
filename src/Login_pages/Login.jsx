@@ -72,7 +72,6 @@ function Login() {
       const data = await response.json();
 
       if (response.ok) {
-        alert(action + " successful");
         navigate("/movie");
       } else {
         alert(data.message || "Invalid username or password");
