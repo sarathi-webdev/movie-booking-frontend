@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 function Login() {
   const navigate = useNavigate();
   const [action, setAction] = useState("Login");
+  const [error, setError] = useState("");
+
 
   const [formData, setFormData] = useState({
     name: "",
@@ -18,6 +20,7 @@ function Login() {
   });
 
   const handleChange = (e) => {
+    setError(""); // clear error when user types
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
@@ -42,6 +45,7 @@ function Login() {
       alert("Username and Password are required");
       return;
     }
+
 
     const url =
       action === "Login"
@@ -71,15 +75,18 @@ function Login() {
 
       const data = await response.json();
 
-      if (response.ok) {
-        navigate("/movie");
-      } else {
-        alert(data.message || "Invalid username or password");
-      }
+     if (response.ok) {
+  setError("");
+  navigate("/movie");
+} else {
+  setError(data.message || "Invalid username or password");
+}
+
     } catch (error) {
-      console.error(error);
-      alert("Server error");
-    }
+  console.error(error);
+  setError("Server error. Please try again.");
+}
+
   };
 
   return (
@@ -181,6 +188,14 @@ function Login() {
               autoComplete="new-password"
             />
           </div>
+
+          {error && (
+         <p style={{ color: "red", marginTop: "5px", fontSize: "14px" }}>
+           {error}
+          </p>
+                 )}
+
+        
          
           </>
          )}
