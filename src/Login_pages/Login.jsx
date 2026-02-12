@@ -44,6 +44,8 @@ function Login() {
     if (!formData.username || !formData.password) {
       alert("Username and Password are required");
       return;
+
+
     }
 
 
@@ -188,11 +190,14 @@ function Login() {
               autoComplete="new-password"
             />
           </div>
+          
 
           {error && (
+            <div className="d-flex justify-content-center">
          <p style={{ color: "red", marginTop: "5px", fontSize: "14px" }}>
            {error}
           </p>
+          </div>
                  )}
 
         
