@@ -9,7 +9,8 @@ function Selectpre() {
 
   const [formData, setFormData] = useState({
     movieId: id,
-    theatresNames: [],
+    movieName: name,
+    theatreNames: [],
     showDates: "",
     showTimes: []
   });
