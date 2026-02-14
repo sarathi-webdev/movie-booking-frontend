@@ -3,6 +3,7 @@ import "./loginstyle.css";
 import user_icon from "../assets/person.png";
 import user_email from "../assets/email.png";
 import user_pass from "../assets/password.png";
+import user_telephone from "../assets/telephone.png"
 import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -141,7 +142,7 @@ function Login() {
               </div>
 
               <div className="input">
-                <img src={user_icon} alt="" />
+                <img src={user_email} alt="" />
                 <input
                   type="text"
                   name="phoneNumber"
