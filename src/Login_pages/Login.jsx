@@ -195,7 +195,7 @@ function Login() {
 
           {error && (
             <div className="d-flex justify-content-center">
-         <p style={{ color: "red", marginTop: "5px", fontSize: "14px" }}>
+         <p style={{ color: "red", marginTop: "10px", fontSize: "14px" }}>
            {error}
           </p>
           </div>
