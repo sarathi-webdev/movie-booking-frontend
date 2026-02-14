@@ -81,6 +81,7 @@ function Login() {
 
      if (response.ok) {
   setError("");
+  localStorage.setItem("token", data.token);
   navigate("/movie");
 } else {
   setError(data.message || "Invalid username or password");
