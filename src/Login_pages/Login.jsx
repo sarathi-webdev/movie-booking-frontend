@@ -42,7 +42,8 @@ function Login() {
     e.preventDefault();
 
     if (!formData.username || !formData.password) {
-      // alert("Username and Password are required");
+      setError("Username and password are Required")
+
       return;
 
 
