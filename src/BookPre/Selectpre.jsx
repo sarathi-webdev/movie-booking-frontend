@@ -38,35 +38,27 @@ function Selectpre() {
     }
   };
  
-        useEffect(()=>{
-        //   fetch('https://unskillful-serendipitously-vanetta.ngrok-free.dev/api/movies'+id,{
-        //   headers: {
-        //     "ngrok-skip-browser-warning": "true"
-        //       }
-        //  }).
+       useEffect(() => {
+  if (!id) return;
 
-          
-        //   then(res => res.json()).
-        //   then(data => setGettingName(data)).
-        //   catch((err)=>console.log("Error dai yeh da ippadi pandra"))
+  fetch("https://moviealert-26ig.onrender.com/api/movies/theatres-shows")
+    .then((res) => res.json())
+    .then((data) => {
+      const movieArray = Array.isArray(data) ? data : data.theatre;
 
-         
-              fetch('http://localhost:3000/movies/'+id).
-              then(res => res.json()).
-              then(data => setGettingName(data)).
-              catch((err)=>console.log(err))
-           
+      const foundMovie = movieArray?.find(
+        (m) => String(m.id) === String(id)
+      );
 
-         
-         fetch('http://localhost:3000/upcomingmovie/'+id).
-                then(data => data.json()).
-                then(data => setGettingName(data)).
-                catch((err)=>console.log(err))
-                
-          },[id])
+      setGettingName(foundMovie || null);
+    })
+    .catch(() => setGettingName(null));
+}, [id]);
+
       
      return (
-    <>(<div className=" preference-page">
+    <>
+    (<div className=" preference-page">
       <div className="preference-card">
         <h3 className="text-center mb-4">{gettingname?.name}</h3>
       

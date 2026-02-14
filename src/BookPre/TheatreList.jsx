@@ -49,9 +49,14 @@ function TheatreList() {
 
   return (
     <div className="container container1">
-      <div className="theatreshow w-100 h-100 m-4">
+      <div className="theatreshow h-100 ">
+        
         {/* MOVIE NAME */}
-        <h3>{movie.name}</h3>
+        <div className="d-flex flex-columns m-0">
+          {/* <i className="bi bi-arrow-left-circle "></i> */}
+        <h3 className="" >{movie.name}</h3>
+        </div>
+        
 
         {/* DATE BAR */}
         <div className="d-flex date-bar mt-4 mb-3">

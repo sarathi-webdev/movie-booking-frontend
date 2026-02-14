@@ -57,7 +57,7 @@
   overflow-y: scroll;          /* Smooth scrolling */
   padding-right: 10px;       /* Prevent scrollbar overlap */
 
-  border: 2px solid whitesmoke;
+  border: 10px solid whitesmoke;
   border-radius: 5px;
 }
 

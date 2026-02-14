@@ -5,8 +5,9 @@
   justify-content: center;
   align-items: center;
   width:100%;
-  max-width: 700px;
+  max-width: 100%;
   margin: 0 auto;
+ 
 
   
 
@@ -50,7 +51,7 @@
 }
 
 .date-box.active {
-  background-color: #000;
+  background-color:  #243b55;;
   color: #fff;
   border-color: #000;
 }
@@ -72,8 +73,8 @@
 
 /* TIME BUTTONS */
 .time-btn {
-  border: 1px solid #28a745;
-  color: #28a745;
+  border: 1px solid  #243b55;;
+  color:  #243b55;;
   margin: 0 8px 8px 0;
   padding: 6px 12px;
   font-size: 14px;
@@ -82,7 +83,7 @@
 }
 
 .time-btn:hover {
-  background-color: #28a745;
+  background-color:  #243b55;;
   color: white;
 }
 
