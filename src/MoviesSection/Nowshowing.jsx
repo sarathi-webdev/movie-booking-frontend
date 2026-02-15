@@ -44,7 +44,7 @@ function NowShowing() {
           >
             {/* ✅ YOUR DESIGN UNCHANGED */}
             <div>
-              <h4 className="mt-5">{movie.name}</h4>
+              <h4 className="mt-4">{movie.name}</h4>
               {/* optional debug */}
               {/* <small>ID: {movie.id}</small> */}
             </div>

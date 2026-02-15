@@ -1,18 +1,15 @@
-// import React,{useState}from "react";
+// import React, { useState } from "react";
 // import Completed from "../PreferencesSel/Completed";
 // import Active from "../PreferencesSel/Active";
 
-
 // function Preference() {
 
-//    const [tab1, setTab1] = useState("now");
-
+//   const [tab1, setTab1] = useState("Active preferences"); // ✅ default selected
 
 //   return (
-//     <>
-//       <div className="preference-whole">
-//          <div className="Preferences-status mb-5">
-
+//     <div className="preference-container">
+//     <div>
+//        <div className="preference-tabs">
 //         <button
 //           className={tab1 === "Active preferences" ? "active" : ""}
 //           onClick={() => setTab1("Active preferences")}
@@ -28,13 +25,14 @@
 //         </button>
 //       </div>
 
-//       {tab1 === "Active preferences" && <Active />}
-//       {tab1 === "Completed" && <Completed />}
-
+//       <div className="preference-content">
+//         {tab1 === "Active preferences" && <Active />}
+//         {tab1 === "Completed" && <Completed />}
 //       </div>
+
+//     </div>
      
-    
-//     </>
+//     </div>
 //   );
 // }
 
@@ -45,37 +43,36 @@ import Active from "../PreferencesSel/Active";
 
 function Preference() {
 
-  const [tab1, setTab1] = useState("Active preferences"); // ✅ default selected
+  const [tab1, setTab1] = useState("active");
 
   return (
     <div className="preference-container">
-    <div>
-       <div className="preference-tabs">
+
+      <div className="preference-tabs">
         <button
-          className={tab1 === "Active preferences" ? "active" : ""}
-          onClick={() => setTab1("Active preferences")}
+          className={tab1 === "active" ? "active" : ""}
+          onClick={() => setTab1("active")}
         >
           Active preferences
         </button>
 
         <button
-          className={tab1 === "Completed" ? "active" : ""}
-          onClick={() => setTab1("Completed")}
+          className={tab1 === "completed" ? "active" : ""}
+          onClick={() => setTab1("completed")}
         >
           Completed
         </button>
       </div>
 
       <div className="preference-content">
-        {tab1 === "Active preferences" && <Active />}
-        {tab1 === "Completed" && <Completed />}
+        {tab1 === "active" && <Active />}
+        {tab1 === "completed" && <Completed />}
       </div>
 
-    </div>
-     
     </div>
   );
 }
 
 export default Preference;
+
 

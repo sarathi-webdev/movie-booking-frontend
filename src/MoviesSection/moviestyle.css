@@ -149,34 +149,41 @@
 }
 .preference-container {
   width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
+  max-width: 1000px;
+  margin: 40px auto;
   padding: 20px;
+  border: 5px solid  #f9f9f9;;
+  background-color:  #f9f9f9;;
+  border-radius: 10px;
 }
 
 .preference-tabs {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   gap: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 .preference-tabs button {
-  padding: 10px 20px;
-  border: none;
-  background: #eee;
+  padding: 10px 25px;
+  background: transparent;
   cursor: pointer;
-  border-radius: 6px;
-  font-weight: 500;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: 0.3s;
 }
 
 .preference-tabs button.active {
-  background: #09e539;
+  background:  #243b55;;
   color: white;
 }
 
 .preference-content {
-  text-align: center;
+  border-radius: 12px;
+  padding: 30px;
+  min-height: 200px;
+  background: #f9f9f9;
 }
+
 
 
