@@ -336,7 +336,7 @@ function Selectpre() {
         }
       );
 
-      const data = await response.json();
+      const data = await response.text();
 
       if (response.ok) {
         alert("Preferences saved successfully");
