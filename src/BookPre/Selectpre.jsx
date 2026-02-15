@@ -3,13 +3,14 @@
 // import { useState, useEffect } from "react";
 
 // function Selectpre() {
-//   const { id } = useParams();
+
+//   const { type, id } = useParams();
 
 //   const [gettingname, setGettingName] = useState(null);
 
 //   const [formData, setFormData] = useState({
 //     movieId: id,
-//     movieName: name,
+//     movieName: "",
 //     theatreNames: [],
 //     showDates: "",
 //     showTimes: []
@@ -23,7 +24,7 @@
 //     "Rohini Theatre"
 //   ];
 
-//   // ✅ Update movieId when id changes
+//   // Update movieId when id changes
 //   useEffect(() => {
 //     setFormData((prev) => ({
 //       ...prev,
@@ -31,70 +32,83 @@
 //     }));
 //   }, [id]);
 
-//   // ✅ Fetch movie name
+//   // 🔥 Fetch movie based on type (NOW FIXED)
 //   useEffect(() => {
-//     if (!id) return;
+//     if (!id || !type) return;
 
-//     fetch("https://moviealert-26ig.onrender.com/api/movies/theatres-shows")
+//     let url = "";
+
+//     if (type === "now") {
+//       url = "https://moviealert-26ig.onrender.com/api/movies/theatres-shows";
+//     } 
+//     else if (type === "upcoming") {
+//       url = "https://moviealert-26ig.onrender.com/api/upcoming-movie";
+//     }
+
+//     fetch(url)
 //       .then((res) => res.json())
 //       .then((data) => {
-//         const movieArray = Array.isArray(data) ? data : data.theatre;
 
-//         const foundMovie = movieArray?.find(
+//         const movieArray = Array.isArray(data) ? data : [];
+
+//         const foundMovie = movieArray.find(
 //           (m) => String(m.id) === String(id)
 //         );
 
 //         setGettingName(foundMovie || null);
+
+//         if (foundMovie) {
+//           setFormData((prev) => ({
+//             ...prev,
+//             movieName: foundMovie.title   // 🔥 use title (not name)
+//           }));
+//         }
 //       })
 //       .catch(() => setGettingName(null));
-//   }, [id]);
 
-//   // ✅ Theatre selection
+//   }, [type, id]);
+
+//   // Theatre selection
 //   const handleTheatreChange = (e) => {
 //     const { value, checked } = e.target;
 
 //     setFormData((prev) => ({
 //       ...prev,
-//       theatres: checked
-//         ? [...prev.theatres, value]
-//         : prev.theatres.filter((theatre) => theatre !== value)
+//       theatreNames: checked
+//         ? [...prev.theatreNames, value]
+//         : prev.theatreNames.filter((theatre) => theatre !== value)
 //     }));
 //   };
 
-//   // ✅ Time selection
+//   // Time selection
 //   const handleTimeChange = (e) => {
 //     const { id, checked } = e.target;
 
 //     setFormData((prev) => ({
 //       ...prev,
-//       times: checked
-//         ? [...prev.times, id]
-//         : prev.times.filter((time) => time !== id)
+//       showTimes: checked
+//         ? [...prev.showTimes, id]
+//         : prev.showTimes.filter((time) => time !== id)
 //     }));
 //   };
 
-//   // ✅ Submit
+//   // Submit
 //   const handleSubmit = async () => {
-//     console.log("FORM DATA:", formData);
 
 //     if (
-//       formData.theatres.length === 0 ||
-//       !formData.date ||
-//       formData.times.length === 0
+//       formData.theatreNames.length === 0 ||
+//       !formData.showDates ||
+//       formData.showTimes.length === 0
 //     ) {
 //       alert("Please select theatre, date and time");
 //       return;
 //     }
-    
 
-    
-//    const token = localStorage.getItem("token"); // ✅ get token
+//     const token = localStorage.getItem("token");
 
-   
 //     if (!token) {
 //       alert("User not logged in");
 //       return;
-
 //     }
 
 //     try {
@@ -104,20 +118,26 @@
 //           method: "POST",
 //           headers: {
 //             "Content-Type": "application/json",
-//              "Authorization": `Bearer ${token}`
+//             Authorization: `Bearer ${token}`
 //           },
-//           body: JSON.stringify(formData)
+//           body: JSON.stringify({
+//             movieName: formData.movieName,
+//             theatreNames: formData.theatreNames,
+//             showDates: [formData.showDates],
+//             showTimes: formData.showTimes
+//           })
 //         }
 //       );
 
-//       const data = await response.json();
+//       const data = await response.text();
 
 //       if (response.ok) {
 //         alert("Preferences saved successfully");
 //         console.log(data);
 //       } else {
-//         alert(data.message || "Something went wrong");
+//         alert("Something went wrong");
 //       }
+
 //     } catch (error) {
 //       console.error(error);
 //       alert("Server error");
@@ -127,7 +147,11 @@
 //   return (
 //     <div className="preference-page">
 //       <div className="preference-card">
-//         <h3 className="text-center mb-4">{gettingname?.name}</h3>
+
+//         {/* 🔥 FIXED: Use title instead of name */}
+//         <h3 className="text-center mb-4">
+//           {gettingname?.title}
+//         </h3>
 
 //         {/* THEATRE */}
 //         <div className="mb-4">
@@ -163,7 +187,7 @@
 //             onChange={(e) =>
 //               setFormData((prev) => ({
 //                 ...prev,
-//                 date: e.target.value
+//                 showDates: e.target.value
 //               }))
 //             }
 //           />
@@ -174,33 +198,16 @@
 //           <label className="form-label">Select Time Slot</label>
 
 //           <div className="time-slots">
-//             <input
-//               type="checkbox"
-//               id="09:00"
-//               onChange={handleTimeChange}
-//             />
-//             <label htmlFor="09:00">09:00</label>
-
-//             <input
-//               type="checkbox"
-//               id="12:00"
-//               onChange={handleTimeChange}
-//             />
-//             <label htmlFor="12:00">12:00</label>
-
-//             <input
-//               type="checkbox"
-//               id="03:00"
-//               onChange={handleTimeChange}
-//             />
-//             <label htmlFor="03:00">03:00</label>
-
-//             <input
-//               type="checkbox"
-//               id="06:00"
-//               onChange={handleTimeChange}
-//             />
-//             <label htmlFor="06:00">06:00</label>
+//             {["09:00", "12:00", "03:00", "06:00"].map((time) => (
+//               <div key={time}>
+//                 <input
+//                   type="checkbox"
+//                   id={time}
+//                   onChange={handleTimeChange}
+//                 />
+//                 <label htmlFor={time}>{time}</label>
+//               </div>
+//             ))}
 //           </div>
 //         </div>
 
@@ -210,6 +217,7 @@
 //         >
 //           Continue
 //         </button>
+
 //       </div>
 //     </div>
 //   );
@@ -221,7 +229,7 @@ import "./selectstyle.css";
 import { useState, useEffect } from "react";
 
 function Selectpre() {
-  const { id } = useParams();
+  const { type, id } = useParams();
 
   const [gettingname, setGettingName] = useState(null);
 
@@ -249,32 +257,56 @@ function Selectpre() {
     }));
   }, [id]);
 
-  // Fetch movie name
+  // ✅ FETCH MOVIE BASED ON TYPE
   useEffect(() => {
-    if (!id) return;
+    if (!id || !type) return;
 
-    fetch("https://moviealert-26ig.onrender.com/api/movies/theatres-shows")
-      .then((res) => res.json())
+    let url = "";
+
+    if (type === "now") {
+      url = "https://moviealert-26ig.onrender.com/api/movies/theatres-shows";
+    } else if (type === "upcoming") {
+      url = "https://moviealert-26ig.onrender.com/api/upcoming-movie";
+    }
+
+    fetch(url)
+      .then((res) => {
+        if (!res.ok) throw new Error("API error");
+        return res.json();
+      })
       .then((data) => {
-        const movieArray = Array.isArray(data) ? data : data.theatre;
+        let movieArray = [];
 
-        const foundMovie = movieArray?.find(
+        // 🔥 Handle different response structures
+        if (type === "now") {
+          movieArray = data?.theatre || [];
+        } else {
+          movieArray = Array.isArray(data) ? data : [];
+        }
+
+        const foundMovie = movieArray.find(
           (m) => String(m.id) === String(id)
         );
 
-        setGettingName(foundMovie || null);
-
         if (foundMovie) {
+          setGettingName(foundMovie);
+
           setFormData((prev) => ({
             ...prev,
-            movieName: foundMovie.name
+            movieName: foundMovie.name || foundMovie.title
           }));
+        } else {
+          setGettingName(null);
         }
       })
-      .catch(() => setGettingName(null));
-  }, [id]);
+      .catch((err) => {
+        console.error("Fetch error:", err);
+        setGettingName(null);
+      });
 
-  // Theatre selection
+  }, [type, id]);
+
+  // THEATRE SELECTION
   const handleTheatreChange = (e) => {
     const { value, checked } = e.target;
 
@@ -286,7 +318,7 @@ function Selectpre() {
     }));
   };
 
-  // Time selection
+  // TIME SELECTION
   const handleTimeChange = (e) => {
     const { id, checked } = e.target;
 
@@ -298,10 +330,8 @@ function Selectpre() {
     }));
   };
 
-  // Submit
+  // SUBMIT
   const handleSubmit = async () => {
-    console.log("FORM DATA:", formData);
-
     if (
       formData.theatreNames.length === 0 ||
       !formData.showDates ||
@@ -330,20 +360,18 @@ function Selectpre() {
           body: JSON.stringify({
             movieName: formData.movieName,
             theatreNames: formData.theatreNames,
-            showDates: [formData.showDates], // backend expects array
+            showDates: [formData.showDates],
             showTimes: formData.showTimes
           })
         }
       );
 
-      const data = await response.text();
-
       if (response.ok) {
         alert("Preferences saved successfully");
-        console.log(data);
       } else {
-        alert(data.message || "Something went wrong");
+        alert("Something went wrong");
       }
+
     } catch (error) {
       console.error(error);
       alert("Server error");
@@ -353,7 +381,13 @@ function Selectpre() {
   return (
     <div className="preference-page">
       <div className="preference-card">
-        <h3 className="text-center mb-4">{gettingname?.name}</h3>
+
+        {/* ✅ Movie Title Display */}
+        <h3 className="text-center mb-4">
+          {gettingname
+            ? gettingname.name || gettingname.title
+            : "Loading..."}
+        </h3>
 
         {/* THEATRE */}
         <div className="mb-4">
@@ -419,11 +453,13 @@ function Selectpre() {
         >
           Continue
         </button>
+
       </div>
     </div>
   );
 }
 
 export default Selectpre;
+
 
 

@@ -47,8 +47,8 @@ function Preference() {
 
   return (
     <div className="preference-container">
-
-      <div className="preference-tabs">
+    
+      <div className="preference-tabs ">
         <button
           className={tab1 === "active" ? "active" : ""}
           onClick={() => setTab1("active")}
@@ -68,6 +68,8 @@ function Preference() {
         {tab1 === "active" && <Active />}
         {tab1 === "completed" && <Completed />}
       </div>
+   
+      
 
     </div>
   );

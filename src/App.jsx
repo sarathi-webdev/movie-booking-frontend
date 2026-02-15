@@ -19,7 +19,7 @@ function App() {
       <Route path="/" element={<Login/>}></Route>
       <Route path="/movie" element={<Movie />} />
       <Route path="/theatres/:id" element={<TheatreList/>}/>
-      <Route path="/selectpreference/:id" element={<Selectpre/>}/>
+      <Route path="/selectpreference/:type/:id" element={<Selectpre/>}/>
       <Route path="/addshow" element={<Form/>}/>
      
 

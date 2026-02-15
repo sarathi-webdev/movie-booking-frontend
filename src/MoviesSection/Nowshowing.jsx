@@ -49,7 +49,7 @@ function NowShowing() {
               {/* <small>ID: {movie.id}</small> */}
             </div>
 
-            <div>
+            <div className="prefrenece-nav">
               <button
                 className="btn btn-success w-100 mb-1"
                 onClick={() => navigate("/theatres/" + movie.id)}
@@ -60,7 +60,7 @@ function NowShowing() {
               <button
                 className="btn btn-primary w-100 mb-1"
                 onClick={() =>
-                  navigate("/selectpreference/" + movie.id)
+                  navigate("/selectpreference/now/" + movie.id)
                 }
               >
                 Select Preference
