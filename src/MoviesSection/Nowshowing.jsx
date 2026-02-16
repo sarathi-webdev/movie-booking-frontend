@@ -14,7 +14,7 @@ function NowShowing() {
         return res.json();
       })
       .then((data) => {
-        console.log("API RESPONSE:", data);
+        // console.log("API RESPONSE:", data);
 
         // ✅ CORRECT: array is inside data.theatre
         if (data?.theatre && Array.isArray(data.theatre)) {

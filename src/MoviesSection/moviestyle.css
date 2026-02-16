@@ -107,85 +107,133 @@
   font-size: 14px;
 }
 
-/* Preference */
 
-.Preferences-status{
+/* ===== GLOBAL FIX ===== */
+* {
+  box-sizing: border-box;
+}
+
+/* ===== MAIN CONTAINER ===== */
+.preference-container {
+  width: 95%;
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 25px;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* ===== STATUS HEADER ===== */
+.Preferences-status {
   display: flex;
-  justify-content:space-around;
+  justify-content: space-between;
   gap: 15px;
-  margin-bottom: 30px;
-  
-
-}
-.preference-whole{
-  border: 2px solid whitesmoke;
-
-  min-height: 60vh;
-  min-width:500px;
-
+  margin-bottom: 25px;
+  flex-wrap: wrap; /* important for mobile */
 }
 
+/* ===== WHOLE SECTION BOX ===== */
+.preference-whole {
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  min-height: 50vh;
+  width: 100%; /* remove fixed width */
+  background: #f8f9fa;
+}
 
+/* ===== SECTION WRAPPER ===== */
 .preference-section {
   width: 100%;
   max-width: 900px;
   margin: auto;
 }
 
+/* ===== CARD STYLE ===== */
 .pref-card {
   padding: 15px;
   border-radius: 10px;
   margin-top: 10px;
+  font-weight: 500;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
 }
 
+/* ACTIVE CARD */
 .pref-card.active {
   background: #198754;
   color: white;
 }
 
+/* COMPLETED CARD */
 .pref-card.completed {
   background: #6c757d;
   color: white;
 }
-.preference-container {
-  width: 100%;
-  max-width: 1000px;
-  margin: 40px auto;
-  padding: 20px;
-  border: 5px solid  #f9f9f9;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-}
 
+/* ===== TABS ===== */
 .preference-tabs {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   gap: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
 }
 
 .preference-tabs button {
   padding: 10px 25px;
-  background: transparent;
+  background: #e9ecef;
   cursor: pointer;
   border-radius: 8px;
   font-weight: 600;
-  transition: 0.3s;
+  border: none;
+  transition: 0.3s ease;
+}
+
+.preference-tabs button:hover {
+  background: #dee2e6;
 }
 
 .preference-tabs button.active {
-  background:  #243b55;;
+  background: #243b55;
   color: white;
 }
 
+/* ===== CONTENT AREA ===== */
 .preference-content {
   border-radius: 12px;
-  padding: 30px;
+  padding: 25px;
   min-height: 200px;
-  background-color: #f9f9f9;
-
-  
+  background-color: #f1f3f5;
+  overflow-y: scroll;  
+  height: 50vh;
 }
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 768px) {
+
+  .preference-container {
+    padding: 15px;
+  }
+
+  .Preferences-status {
+    flex-direction: column;
+  }
+
+  .preference-tabs {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .preference-tabs button {
+    width: 100%;
+  }
+
+  .pref-card {
+    font-size: 14px;
+  }
+}
+
 
 
 
