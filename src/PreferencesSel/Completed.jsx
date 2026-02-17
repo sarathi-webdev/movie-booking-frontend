@@ -31,13 +31,16 @@ function Completed() {
       {completedPrefs.length === 0 && (
         <p className="text-center mt-5">No completed preferences found</p>
       )}
-
-      {completedPrefs.map((pref, index) => (
+      
+        {completedPrefs.map((pref, index) => (
         <div key={index} className="pref-card completed">
           <p><b>Movie:</b> {pref.movieName}</p>
           <p><b>Status:</b> Watched</p>
         </div>
       ))}
+        
+     
+      
 
     </div>
   );

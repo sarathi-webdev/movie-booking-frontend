@@ -14,7 +14,7 @@ function ActivePreferences() {
     })
       .then((res) => {
         if (!res.ok) throw new Error("Fetch failed");
-         console.log("STATUS:", res.status);
+        console.log("STATUS:", res.status);
         return res.json();
       })
       .then((data) => {
@@ -36,7 +36,61 @@ function ActivePreferences() {
         setPreferences([]);
       });
 
+    if (!token) return;
+    fetchActivePreferences();
+
+
   }, [token]);
+
+  const handleComplete = async (prefId) => {
+    try {
+      const response = await fetch(
+        "https://moviealert-26ig.onrender.com/api/complete",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({ ids: [prefId] })
+        }
+      );
+
+      
+      const message = await response.text();
+    console.log("Server response:", message);
+
+      if (!response.ok) throw new Error("Failed");
+
+      fetchActivePreferences();
+
+      // Remove completed item from active UI
+      setPreferences((prev) =>
+        prev.filter((pref) => pref.id !== prefId)
+      );
+      console.log("sent data to completed")
+
+    } catch (error) {
+      console.error(error);
+      alert("Error completing preference");
+    }
+  };
+
+  const fetchActivePreferences = () => {
+    fetch("https://moviealert-26ig.onrender.com/api/preferences/active", {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setPreferences(Array.isArray(data) ? data : []);
+      })
+      .catch(() => setPreferences([]));
+  };
+
+
+
 
   return (
     <div className="mt-4">
@@ -57,7 +111,7 @@ function ActivePreferences() {
             {pref.theatreNames?.join(", ")}
           </p>
 
-         
+
           <p>
             <strong>Date:</strong>{" "}
             {pref.showDate}
@@ -68,6 +122,14 @@ function ActivePreferences() {
             <strong>Time:</strong>{" "}
             {pref.showTimes?.join(", ")}
           </p>
+
+          <button
+            className="btn btn-success"
+            onClick={() => handleComplete(pref._id)}
+          >
+            Complete
+          </button>
+
         </div>
       ))}
     </div>
