@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import NowShowing from "./Nowshowing";
 import Upcoming from "./Upcoming";
 import Preference from "./Preference";
-import "./moviestyle.css";
+// import "./moviestyle.css";
+import "./dummystyle.css"
 
 function Movie() {
   const [tab, setTab] = useState("now");

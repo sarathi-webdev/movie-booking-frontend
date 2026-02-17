@@ -1,0 +1,423 @@
+/* ================================================
+   PREFERENCES — Active & Completed
+   Matches the cinema dark system from moviestyle.css
+   ================================================ */
+
+/* ── Reuse tokens if already loaded, else define locally ── */
+:root {
+  --cinema-black:   #080a0f;
+  --cinema-dark:    #0f1218;
+  --cinema-card:    #161b25;
+  --cinema-border:  rgba(255,255,255,0.07);
+  --cinema-amber:   #f5a623;
+  --cinema-amber2:  #e8890a;
+  --cinema-green:   #22c55e;
+  --cinema-red:     #e84040;
+  --text-primary:   #f0ece4;
+  --text-secondary: #8a93a6;
+  --text-muted:     #4a5568;
+  --radius-card:    16px;
+  --radius-btn:     10px;
+  --transition:     0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Panel wrapper ───────────────────────────── */
+.pref-panel {
+  position: relative;
+  padding-top: 4px;
+}
+
+/* ── Count label ─────────────────────────────── */
+.pref-count {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cinema-amber);
+  margin: 0 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pref-count::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--cinema-border);
+}
+
+/* ── List container ──────────────────────────── */
+.pref-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── Card base ───────────────────────────────── */
+.pref-card {
+  background: var(--cinema-card);
+  border: 1px solid var(--cinema-border);
+  border-radius: var(--radius-card);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: prefCardIn 0.35s ease both;
+  transition: border-color var(--transition), transform var(--transition);
+}
+
+@keyframes prefCardIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Active card — subtle green left border */
+.pref-card--active {
+  border-left: 3px solid var(--cinema-green);
+}
+.pref-card--active:hover {
+  border-color: rgba(34, 197, 94, 0.45);
+  transform: translateX(3px);
+}
+
+/* Completed card — muted, slightly dimmed */
+.pref-card--completed {
+  border-left: 3px solid var(--text-muted);
+  opacity: 0.88;
+}
+.pref-card--completed:hover {
+  border-color: rgba(245, 166, 35, 0.3);
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+/* ── Card header row ─────────────────────────── */
+.pref-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* ── Status pills ────────────────────────────── */
+.pref-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.pref-status-pill--active {
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--cinema-green);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+.pref-status-pill--completed {
+  background: rgba(148, 163, 184, 0.08);
+  color: var(--text-secondary);
+  border: 1px solid var(--cinema-border);
+}
+
+/* Animated dot for active */
+.pref-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cinema-green);
+  animation: dotPulse 2s ease-in-out infinite;
+}
+
+.pref-status-dot--done {
+  background: var(--text-muted);
+  animation: none;
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.75); }
+}
+
+/* ── Card id / date tag ──────────────────────── */
+.pref-card-id,
+.pref-card-date {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+/* ── Movie title ─────────────────────────────── */
+.pref-card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.3;
+  /* Truncate if very long */
+  display: -webkit-box;
+  /* -webkit-line-clamp: 2; */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.pref-card--completed .pref-card-title {
+  color: var(--text-secondary);
+}
+
+/* ── Details section ─────────────────────────── */
+.pref-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pref-detail-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.pref-detail-icon {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.pref-detail-label {
+  display: block;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 3px;
+}
+
+.pref-detail-value {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* ── Time chips ──────────────────────────────── */
+.pref-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.pref-chip {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: rgba(245, 166, 35, 0.1);
+  color: var(--cinema-amber);
+  border: 1px solid rgba(245, 166, 35, 0.2);
+  letter-spacing: 0.04em;
+}
+
+.pref-chip--muted {
+  background: rgba(255,255,255,0.04);
+  color: var(--text-muted);
+  border-color: var(--cinema-border);
+}
+
+/* ── Complete button ─────────────────────────── */
+.pref-btn-complete {
+  width: 100%;
+  padding: 11px 16px;
+  background: linear-gradient(135deg, var(--cinema-green), #17a34a);
+  border: none;
+  border-radius: var(--radius-btn);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all var(--transition);
+  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.22);
+  margin-top: 4px;
+}
+
+.pref-btn-complete:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(34, 197, 94, 0.35);
+  filter: brightness(1.08);
+}
+
+.pref-btn-complete:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.pref-btn-complete:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Loading modifier */
+.pref-btn--loading {
+  background: linear-gradient(135deg, #17a34a, #15803d);
+}
+
+/* ── Button spinner ──────────────────────────── */
+.pref-spinner {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  border: 2px solid rgba(255,255,255,0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: prefSpin 0.65s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes prefSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Rating row (Completed) ──────────────────── */
+.pref-rating-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 4px;
+  border-top: 1px solid var(--cinema-border);
+}
+
+.pref-stars {
+  display: flex;
+  gap: 4px;
+}
+
+.pref-star {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color var(--transition), transform var(--transition);
+  line-height: 1;
+}
+
+.pref-star:hover,
+.pref-star.filled {
+  color: var(--cinema-amber);
+  transform: scale(1.2);
+}
+
+/* ── Empty state ─────────────────────────────── */
+.pref-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 56px 20px;
+  text-align: center;
+  animation: prefCardIn 0.4s ease both;
+}
+
+.pref-empty-icon {
+  font-size: 2.8rem;
+  opacity: 0.3;
+  display: block;
+}
+
+.pref-empty-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.pref-empty-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 260px;
+}
+
+/* ── Skeleton ────────────────────────────────── */
+.pref-skeleton-card {
+  background: var(--cinema-card);
+  border: 1px solid var(--cinema-border);
+  border-radius: var(--radius-card);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pref-sk-line {
+  border-radius: 6px;
+  background: linear-gradient(90deg, #161b25 25%, #1e2535 50%, #161b25 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.pref-sk-btn {
+  height: 38px !important;
+  border-radius: 10px;
+  margin-top: 6px;
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+/* ── Toast ───────────────────────────────────── */
+.pref-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  padding: 12px 22px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.5);
+  animation: toastIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.pref-toast--success {
+  background: #14532d;
+  color: #86efac;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.pref-toast--error {
+  background: #450a0a;
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(12px) scale(0.95); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+}
+
+/* ── Mobile ──────────────────────────────────── */
+@media (max-width: 480px) {
+  .pref-card { padding: 14px 15px; }
+  .pref-card-title { font-size: 0.95rem; }
+  .pref-btn-complete { padding: 10px 14px; font-size: 0.78rem; }
+  .pref-toast { width: calc(100% - 40px); text-align: center; white-space: normal; }
+}

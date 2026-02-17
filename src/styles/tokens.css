@@ -1,0 +1,91 @@
+/* ================================================================
+   DESIGN TOKENS — paste into src/styles/tokens.css
+   ================================================================ */
+:root {
+  /* ── Color Palette ── */
+  --color-primary:        #4F46E5;   /* Indigo 600 */
+  --color-primary-light:  #818CF8;   /* Indigo 400 */
+  --color-primary-dark:   #3730A3;   /* Indigo 800 */
+  --color-primary-muted:  #EEF2FF;   /* Indigo 50  */
+
+  --color-surface:        #FFFFFF;
+  --color-surface-alt:    #F8FAFC;   /* Slate 50  */
+  --color-border:         #E2E8F0;   /* Slate 200 */
+  --color-border-subtle:  #F1F5F9;   /* Slate 100 */
+
+  --color-text-primary:   #0F172A;   /* Slate 900 */
+  --color-text-secondary: #475569;   /* Slate 600 */
+  --color-text-muted:     #94A3B8;   /* Slate 400 */
+  --color-text-inverse:   #FFFFFF;
+
+  --color-success:        #10B981;
+  --color-success-muted:  #D1FAE5;
+  --color-warning:        #F59E0B;
+  --color-warning-muted:  #FEF3C7;
+  --color-danger:         #EF4444;
+  --color-danger-muted:   #FEE2E2;
+
+  /* ── Typography ── */
+  --font-family-base: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  --font-size-xs:   0.75rem;    /* 12px */
+  --font-size-sm:   0.875rem;   /* 14px */
+  --font-size-base: 1rem;       /* 16px */
+  --font-size-md:   1.125rem;   /* 18px */
+  --font-size-lg:   1.25rem;    /* 20px */
+  --font-size-xl:   1.5rem;     /* 24px */
+  --font-size-2xl:  1.875rem;   /* 30px */
+  --font-size-3xl:  2.25rem;    /* 36px */
+
+  --font-weight-normal:   400;
+  --font-weight-medium:   500;
+  --font-weight-semibold: 600;
+  --font-weight-bold:     700;
+
+  /* ── Spacing (4px grid) ── */
+  --space-1: 0.25rem;   /* 4px  */
+  --space-2: 0.5rem;    /* 8px  */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+
+  /* ── Radii ── */
+  --radius-sm:   0.25rem;
+  --radius-md:   0.5rem;
+  --radius-lg:   0.75rem;
+  --radius-xl:   1rem;
+  --radius-2xl:  1.5rem;
+  --radius-full: 9999px;
+
+  /* ── Shadows ── */
+  --shadow-xs: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.1), 0 1px 2px rgba(0,0,0,.06);
+  --shadow-md: 0 4px 6px rgba(0,0,0,.07), 0 2px 4px rgba(0,0,0,.05);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,.08), 0 4px 6px rgba(0,0,0,.05);
+  --shadow-xl: 0 20px 25px rgba(0,0,0,.10), 0 10px 10px rgba(0,0,0,.04);
+  --shadow-focus: 0 0 0 3px rgba(79,70,229,.35);
+
+  /* ── Transitions ── */
+  --transition-fast:   all 0.1s ease;
+  --transition-base:   all 0.2s ease;
+  --transition-spring: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+/* ── Dark Mode ── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-surface:        #0F172A;
+    --color-surface-alt:    #1E293B;
+    --color-border:         #334155;
+    --color-border-subtle:  #1E293B;
+    --color-text-primary:   #F8FAFC;
+    --color-text-secondary: #CBD5E1;
+    --color-text-muted:     #64748B;
+    --color-primary-muted:  rgba(79,70,229,.15);
+  }
+}

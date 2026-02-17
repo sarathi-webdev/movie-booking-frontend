@@ -1,0 +1,335 @@
+/* ================================================
+   THEATRE LIST PAGE — stylethreatre.css
+   Matches cinema dark system
+   ================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --cinema-black:   #080a0f;
+  --cinema-dark:    #0f1218;
+  --cinema-card:    #161b25;
+  --cinema-border:  rgba(255,255,255,0.07);
+  --cinema-amber:   #f5a623;
+  --cinema-amber2:  #e8890a;
+  --text-primary:   #f0ece4;
+  --text-secondary: #8a93a6;
+  --text-muted:     #4a5568;
+  --radius-card:    16px;
+  --transition:     0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Page shell ───────────────────────────────── */
+.container1 {
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  background: var(--cinema-black);
+  background-image: radial-gradient(
+    ellipse 60% 30% at 50% 0%,
+    rgba(245,166,35,0.05) 0%,
+    transparent 60%
+  );
+  font-family: 'Outfit', sans-serif;
+  color: var(--text-primary);
+  display: block;           /* override flex from Bootstrap .container */
+  align-items: unset;
+  justify-content: unset;
+}
+
+/* ── Inner wrapper ───────────────────────────── */
+.theatreshow {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 40px 20px 60px;
+}
+
+/* ── Back + title row ────────────────────────── */
+.theatre-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.theatre-back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--cinema-border);
+  border-radius: 10px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition);
+  flex-shrink: 0;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.theatre-back-btn:hover {
+  background: rgba(245,166,35,0.08);
+  border-color: rgba(245,166,35,0.3);
+  color: var(--cinema-amber);
+}
+
+.theatre-movie-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cinema-amber);
+  margin-bottom: 4px;
+}
+
+.theatre-movie-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+@media (max-width: 480px) {
+  .theatre-movie-name { font-size: 1.25rem; }
+}
+
+/* ── Section label ───────────────────────────── */
+.theatre-section-label {
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 28px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.theatre-section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--cinema-border);
+}
+
+/* ── Date bar ────────────────────────────────── */
+.date-bar {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.date-bar::-webkit-scrollbar { display: none; }
+
+.date-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 62px;
+  padding: 10px 10px 8px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--cinema-border);
+  border-radius: 12px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all var(--transition);
+}
+
+.date-box:hover {
+  border-color: rgba(245,166,35,0.3);
+  background: rgba(245,166,35,0.05);
+}
+
+.date-box small {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: block;
+  line-height: 1.3;
+}
+
+.date-box h5 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin: 4px 0 2px;
+  line-height: 1;
+}
+
+.date-box .date-label-tag {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+/* Active date */
+.date-box.active {
+  background: rgba(245,166,35,0.1);
+  border-color: var(--cinema-amber);
+}
+.date-box.active small,
+.date-box.active .date-label-tag { color: var(--cinema-amber); }
+.date-box.active h5              { color: var(--cinema-amber); }
+
+/* ── Theatre cards container ─────────────────── */
+.theatre-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 58vh;
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--cinema-border) transparent;
+}
+.theatre-cards::-webkit-scrollbar { width: 4px; }
+.theatre-cards::-webkit-scrollbar-thumb {
+  background: var(--cinema-border);
+  border-radius: 4px;
+}
+
+/* ── Individual theatre card ─────────────────── */
+.theatre-card {
+  background: var(--cinema-card);
+  border: 1px solid var(--cinema-border);
+  border-radius: var(--radius-card);
+  padding: 18px 20px;
+  transition: border-color var(--transition);
+  animation: slideIn 0.3s ease both;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.theatre-card:nth-child(2) { animation-delay: 0.06s; }
+.theatre-card:nth-child(3) { animation-delay: 0.12s; }
+.theatre-card:nth-child(4) { animation-delay: 0.18s; }
+
+.theatre-card:hover {
+  border-color: rgba(245,166,35,0.2);
+}
+
+.theatre-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.theatre-card h6 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.theatre-card h6::before {
+  content: '🎭';
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.theatre-avail-tag {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.08);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+/* ── Time buttons ────────────────────────────── */
+.time-btns-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.time-btn {
+  padding: 7px 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--cinema-border);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.time-btn:hover {
+  background: rgba(245,166,35,0.1);
+  border-color: rgba(245,166,35,0.4);
+  color: var(--cinema-amber);
+  transform: translateY(-1px);
+}
+
+.time-btn:active {
+  transform: translateY(0);
+}
+
+/* Divider between theatre cards */
+.theatre-card-divider {
+  border: none;
+  border-top: 1px solid var(--cinema-border);
+  margin: 14px 0 0;
+}
+
+/* ── Empty / loading state ───────────────────── */
+.theatre-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: var(--cinema-black);
+  font-family: 'Outfit', sans-serif;
+  gap: 14px;
+}
+
+.theatre-loading-spinner {
+  width: 36px; height: 36px;
+  border: 3px solid var(--cinema-border);
+  border-top-color: var(--cinema-amber);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.theatre-loading p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* ── Mobile ──────────────────────────────────── */
+@media (max-width: 480px) {
+  .theatreshow         { padding: 24px 14px 40px; }
+  .date-box            { min-width: 55px; padding: 8px 8px 6px; }
+  .date-box h5         { font-size: 1rem; }
+  .theatre-card        { padding: 14px 15px; }
+  .time-btn            { padding: 6px 12px; font-size: 0.76rem; }
+}

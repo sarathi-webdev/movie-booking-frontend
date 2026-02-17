@@ -1,0 +1,343 @@
+/* ================================================
+   SELECT PREFERENCE PAGE — selectstyle.css
+   Matches cinema dark system (tokens from moviestyle.css)
+   ================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --cinema-black:   #080a0f;
+  --cinema-dark:    #0f1218;
+  --cinema-card:    #161b25;
+  --cinema-border:  rgba(255,255,255,0.07);
+  --cinema-amber:   #f5a623;
+  --cinema-amber2:  #e8890a;
+  --cinema-green:   #22c55e;
+  --text-primary:   #f0ece4;
+  --text-secondary: #8a93a6;
+  --text-muted:     #4a5568;
+  --radius-card:    16px;
+  --radius-btn:     10px;
+  --transition:     0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Page shell ───────────────────────────────── */
+.preference-page {
+  min-height: 100vh;
+  background: var(--cinema-black);
+  background-image: radial-gradient(
+    ellipse 70% 35% at 50% 0%,
+    rgba(245,166,35,0.06) 0%,
+    transparent 60%
+  );
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 48px 16px 60px;
+  font-family: 'Outfit', sans-serif;
+}
+
+/* ── Card ─────────────────────────────────────── */
+.preference-card {
+  width: 100%;
+  max-width: 500px;
+  background: var(--cinema-card);
+  border: 1px solid var(--cinema-border);
+  border-radius: 20px;
+  padding: 36px 32px 32px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+  animation: cardIn 0.35s ease both;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gold top accent line */
+.preference-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cinema-amber), transparent);
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Movie title ─────────────────────────────── */
+.pref-movie-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cinema-amber);
+  margin-bottom: 10px;
+}
+
+.pref-movie-badge::before {
+  content: '';
+  width: 18px;
+  height: 2px;
+  background: var(--cinema-amber);
+  border-radius: 2px;
+}
+
+.pref-movie-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 28px;
+  line-height: 1.25;
+}
+
+/* ── Section block ───────────────────────────── */
+.pref-section {
+  margin-bottom: 26px;
+}
+
+.pref-section-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pref-section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--cinema-border);
+}
+
+/* ── Theatre checkboxes ──────────────────────── */
+.theatre-checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 220px;
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--cinema-border) transparent;
+}
+
+.theatre-checkbox-group::-webkit-scrollbar { width: 4px; }
+.theatre-checkbox-group::-webkit-scrollbar-track { background: transparent; }
+.theatre-checkbox-group::-webkit-scrollbar-thumb {
+  background: var(--cinema-border);
+  border-radius: 4px;
+}
+
+/* Hide native checkbox, style the label as a card */
+.theatre-check-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--cinema-border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all var(--transition);
+  user-select: none;
+}
+
+.theatre-check-item:hover {
+  background: rgba(245,166,35,0.05);
+  border-color: rgba(245,166,35,0.25);
+}
+
+.theatre-check-item input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--text-muted);
+  border-radius: 5px;
+  background: transparent;
+  flex-shrink: 0;
+  cursor: pointer;
+  position: relative;
+  transition: all var(--transition);
+}
+
+.theatre-check-item input[type="checkbox"]:checked {
+  background: var(--cinema-amber);
+  border-color: var(--cinema-amber);
+}
+
+.theatre-check-item input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 5px;
+  width: 5px; height: 9px;
+  border: 2px solid var(--cinema-black);
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+
+.theatre-check-item input[type="checkbox"]:checked ~ .theatre-label {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.theatre-check-item.is-checked {
+  background: rgba(245,166,35,0.07);
+  border-color: rgba(245,166,35,0.3);
+}
+
+.theatre-label {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  transition: color var(--transition);
+}
+
+/* ── Date picker ─────────────────────────────── */
+.pref-date-input {
+  width: 100%;
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--cinema-border);
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  color-scheme: dark;
+}
+
+.pref-date-input:hover {
+  border-color: rgba(245,166,35,0.3);
+}
+
+.pref-date-input:focus {
+  outline: none;
+  border-color: var(--cinema-amber);
+  box-shadow: 0 0 0 3px rgba(245,166,35,0.12);
+}
+
+/* ── Time slots ──────────────────────────────── */
+.time-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Hide native checkbox */
+.time-slots input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Style the label as a pill toggle */
+.time-slot-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 9px 18px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--cinema-border);
+  border-radius: var(--radius-btn);
+  color: var(--text-secondary);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.83rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+  user-select: none;
+}
+
+.time-slot-label:hover {
+  border-color: rgba(245,166,35,0.35);
+  color: var(--cinema-amber);
+  background: rgba(245,166,35,0.05);
+}
+
+/* Checked state via sibling selector */
+.time-slots input[type="checkbox"]:checked + .time-slot-label {
+  background: rgba(245,166,35,0.12);
+  border-color: var(--cinema-amber);
+  color: var(--cinema-amber);
+  font-weight: 700;
+  box-shadow: 0 2px 10px rgba(245,166,35,0.18);
+}
+
+/* ── Divider ─────────────────────────────────── */
+.pref-divider {
+  border: none;
+  border-top: 1px solid var(--cinema-border);
+  margin: 28px 0;
+}
+
+/* ── Submit button ───────────────────────────── */
+.pref-submit-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--cinema-amber), var(--cinema-amber2));
+  border: none;
+  border-radius: var(--radius-btn);
+  color: var(--cinema-black);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--transition);
+  box-shadow: 0 4px 18px rgba(245,166,35,0.3);
+}
+
+.pref-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(245,166,35,0.45);
+  filter: brightness(1.07);
+}
+
+.pref-submit-btn:active {
+  transform: translateY(0);
+}
+
+.pref-submit-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* loading state */
+.pref-submit-btn.is-loading {
+  pointer-events: none;
+  opacity: 0.75;
+}
+
+/* ── Validation hint ─────────────────────────── */
+.pref-hint {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 10px;
+}
+
+.pref-hint.error {
+  color: #f87171;
+}
+
+/* ── Mobile ──────────────────────────────────── */
+@media (max-width: 480px) {
+  .preference-page    { padding: 24px 12px 40px; }
+  .preference-card    { padding: 24px 18px 22px; border-radius: 16px; }
+  .pref-movie-title   { font-size: 1.2rem; }
+  .time-slot-label    { padding: 8px 14px; font-size: 0.8rem; }
+}
