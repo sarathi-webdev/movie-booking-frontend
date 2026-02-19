@@ -2,7 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import {BrowserRouter,Routes,Route} from "react-router-dom"
-import Login from './Login_pages/Login'
+import Login from './Login_pages/Login1'
 // import Movie from './MoviesSection/Movie'
 import Movie1 from './MoviesSection/Movie1'
 import TheatreList from './BookPre/TheatreList1'
