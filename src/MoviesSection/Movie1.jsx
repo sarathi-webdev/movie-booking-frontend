@@ -2,21 +2,28 @@ import React, { useState } from "react";
 import NowShowing from "./Nowshowing1";
 import Upcoming from "./Upcoming1";
 import Preference from "./Preference1";
+import AddShow from '../AddShows/Form'
 import "./dummystyle.css";
 import { useNavigate } from "react-router-dom";
 
 // Tab config — easy to extend
-const TABS = [
+const BASE_TABS = [
   { id: "now", label: "Now Showing", icon: "🎬" },
   { id: "upcoming", label: "Upcoming", icon: "🗓" },
   { id: "preference", label: "Preferences", icon: "⭐" },
 ];
+
+// Admin-only tab
+const ADMIN_TAB = { id: "addshow", label: "Add Show", icon: "➕" };
 
 function Movie() {
   const [tab, setTab] = useState("now");
   const isAdmin = localStorage.getItem("isAdmin") === "true";
   const username = localStorage.getItem("username");
   const navigate = useNavigate();
+
+  // Build visible tab list: add admin tab when logged in as admin
+  const TABS = isAdmin ? [...BASE_TABS, ADMIN_TAB] : BASE_TABS;
 
 
   const handleLogout = () => {
@@ -85,13 +92,14 @@ function Movie() {
         {tab === "now" && <NowShowing />}
         {tab === "upcoming" && <Upcoming />}
         {tab === "preference" && <Preference />}
+        {tab === "addshow" && isAdmin && <AddShow />}
       </div>
 
     </div>
 
-    
+
   );
-  
+
 }
 
 export default Movie;

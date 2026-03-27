@@ -97,40 +97,47 @@ function Login() {
     console.log("🔐 Auth request:", action, url);
 
     setIsLoading(true);
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+   try {
+  const response = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
 
-      const data = await response.json();
-      console.log("📥 Response:", response.status, data);
+  const contentType = response.headers.get("content-type");
 
-      if (response.ok) {
-        setError("");
+  let data;
 
-        // Store token
-        const token = data.token || data.jwt || data.accessToken;
-        if (token) {
-          localStorage.setItem("token", token);
-          console.log("✅ Token stored successfully");
-        }
+  if (contentType && contentType.includes("application/json")) {
+    data = await response.json();
+  } else {
+    const text = await response.text();
+    data = { message: text };
+  }
 
-         // ✅ Normal user → NOT admin
-      localStorage.setItem("isAdmin", "false");
-      localStorage.setItem("username", formData.username);
-        
+  console.log("📥 Response:", response.status, data);
 
-        // Navigate to movies
-        navigate("/movie");
-      } else {
-        setError(data.message || "Invalid username or password");
-      }
-    } catch (error) {
-      console.error("❌ Network error:", error);
-      setError("Server error. Please try again.");
-    } finally {
+  if (response.ok) {
+    setError("");
+
+    const token = data.token || data.jwt || data.accessToken;
+    if (token) {
+      localStorage.setItem("token", token);
+    }
+
+    localStorage.setItem("isAdmin", "false");
+    localStorage.setItem("username", formData.username);
+
+    navigate("/movie");
+  } else {
+    setError(data.message || "Something went wrong");
+  }
+
+} catch (error) {
+  console.error("❌ Network error:", error);
+  setError("Server error. Please try again.");
+}
+     finally {
       setIsLoading(false);
     }
   };

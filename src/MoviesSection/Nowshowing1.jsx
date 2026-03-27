@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
-const isAdmin = localStorage.getItem("isAdmin") === "true";
+
 
 export const movieApi = createContext();
 
@@ -27,18 +27,21 @@ function SkeletonCards() {
 
 
 function NowShowing() {
+
+  const isAdmin = localStorage.getItem("isAdmin") === "true";
+
   const navigate = useNavigate();
   const [moviecard, setMoviecard] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
  const handleDelete = async (id) => {
-  const token = localStorage.getItem("token");
+  // const token = localStorage.getItem("token");
 
-  if (!token) {
-    alert("No token found. Please login again.");
-    return;
-  }
+  // if (!token) {
+  //   alert("No token found. Please login again.");
+  //   return;
+  // }
 
   try {
     const res = await fetch(
@@ -51,17 +54,23 @@ function NowShowing() {
       }
     );
 
-    if (res.status === 403) {
-      alert("❌ You are not authorized (Admin only)");
-      return;
-    }
+    // if (res.status === 403) {
+    //   alert("❌ You are not authorized (Admin only)");
+    //   return;
+    // }
+
+   // ✅ Log exact status and response body
+    const responseText = await res.text();
+    console.log("Status:", res.status);
+    console.log("Response body:", responseText);
+
 
     if (!res.ok) {
       throw new Error("Delete failed");
     }
 
     // ✅ Update UI
-    setMoviecard((prev) => prev.filter((m) => m.id !== id));
+    setMoviecard((prev) => prev.filter((m) => String(m.id) !== String(id)));
 
     alert("✅ Movie deleted successfully");
 
