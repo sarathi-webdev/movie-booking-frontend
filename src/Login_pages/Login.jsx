@@ -42,6 +42,25 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+
+    // ✅ STEP 1: ADMIN LOGIN (FRONTEND ONLY)
+    if (
+      formData.username === "sarathiadmin" &&
+      formData.password === "12345"
+    ) {
+      console.log("✅ Admin login success (frontend)");
+
+      localStorage.setItem("isAdmin", "true");
+      localStorage.setItem("username", formData.username);
+
+      // Optional fake token
+      localStorage.setItem("token", "admin-token");
+
+      navigate("/admin");
+      return; // 🚨 VERY IMPORTANT (stops backend call)
+    }
+
+
     if (!formData.username || !formData.password) {
       setError("Username and password are Required")
 
@@ -59,16 +78,16 @@ function Login() {
     const payload =
       action === "Login"
         ? {
-            username: formData.username,
-            password: formData.password,
-          }
+          username: formData.username,
+          password: formData.password,
+        }
         : {
-            name: formData.name,
-            username: formData.username,
-            email: formData.email,
-            phoneNumber: formData.phoneNumber,
-            password: formData.password,
-          };
+          name: formData.name,
+          username: formData.username,
+          email: formData.email,
+          phoneNumber: formData.phoneNumber,
+          password: formData.password,
+        };
 
     try {
       const response = await fetch(url, {
@@ -79,18 +98,18 @@ function Login() {
 
       const data = await response.json();
 
-     if (response.ok) {
-  setError("");
-  localStorage.setItem("token", data.token);
-  navigate("/movie");
-} else {
-  setError(data.message || "Invalid username or password");
-}
+      if (response.ok) {
+        setError("");
+        localStorage.setItem("token", data.token);
+        navigate("/movie");
+      } else {
+        setError(data.message || "Invalid username or password");
+      }
 
     } catch (error) {
-  console.error(error);
-  setError("Server error. Please try again.");
-}
+      console.error(error);
+      setError("Server error. Please try again.");
+    }
 
   };
 
@@ -118,17 +137,17 @@ function Login() {
                 />
               </div>
 
-               <div className="input">
-            <img src={user_icon} alt="" />
-            <input
-              type="text"
-              name="username"
-              placeholder="Username"
-              value={formData.username}
-              onChange={handleChange}
-              autoComplete="off"
-            />
-          </div>
+              <div className="input">
+                <img src={user_icon} alt="" />
+                <input
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  value={formData.username}
+                  onChange={handleChange}
+                  autoComplete="off"
+                />
+              </div>
 
               <div className="input">
                 <img src={user_email} alt="" />
@@ -155,60 +174,60 @@ function Login() {
               </div>
 
               <div className="input">
-            <img src={user_pass} alt="" />
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-              autoComplete="new-password"
-            />
-          </div>
+                <img src={user_pass} alt="" />
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  autoComplete="new-password"
+                />
+              </div>
             </>
           )}
-         
-         {action  === "Login" && (
-          <>
-             <div className="input">
-            <img src={user_icon} alt="" />
-            <input
-              type="text"
-              name="username"
-              placeholder="Username"
-              value={formData.username}
-              onChange={handleChange}
-              autoComplete="off"
-            />
-          </div>
 
-          <div className="input">
-            <img src={user_pass} alt="" />
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-              autoComplete="new-password"
-            />
-          </div>
-          
+          {action === "Login" && (
+            <>
+              <div className="input">
+                <img src={user_icon} alt="" />
+                <input
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  value={formData.username}
+                  onChange={handleChange}
+                  autoComplete="off"
+                />
+              </div>
 
-          {error && (
-            <div className="d-flex justify-content-center">
-         <p style={{ color: "red", marginTop: "10px", fontSize: "14px" }}>
-           {error}
-          </p>
-          </div>
-                 )}
+              <div className="input">
+                <img src={user_pass} alt="" />
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  autoComplete="new-password"
+                />
+              </div>
 
-        
-         
-          </>
-         )}
-            
-            
+
+              {error && (
+                <div className="d-flex justify-content-center">
+                  <p style={{ color: "red", marginTop: "10px", fontSize: "14px" }}>
+                    {error}
+                  </p>
+                </div>
+              )}
+
+
+
+            </>
+          )}
+
+
         </div>
 
         {/* SINGLE SUBMIT BUTTON */}

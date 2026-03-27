@@ -1,6 +1,9 @@
 import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
+const isAdmin = localStorage.getItem("isAdmin") === "true";
+
 export const movieApi = createContext();
 
 // Skeleton placeholder while loading
@@ -22,11 +25,51 @@ function SkeletonCards() {
   );
 }
 
+
 function NowShowing() {
   const navigate = useNavigate();
   const [moviecard, setMoviecard] = useState([]);
-  const [loading, setLoading]     = useState(true);
-  const [error, setError]         = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+ const handleDelete = async (id) => {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    alert("No token found. Please login again.");
+    return;
+  }
+
+  try {
+    const res = await fetch(
+      `https://moviealert-26ig.onrender.com/api/movie/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (res.status === 403) {
+      alert("❌ You are not authorized (Admin only)");
+      return;
+    }
+
+    if (!res.ok) {
+      throw new Error("Delete failed");
+    }
+
+    // ✅ Update UI
+    setMoviecard((prev) => prev.filter((m) => m.id !== id));
+
+    alert("✅ Movie deleted successfully");
+
+  } catch (err) {
+    console.error(err);
+    alert("❌ Delete failed");
+  }
+};
 
   useEffect(() => {
     fetch("https://moviealert-26ig.onrender.com/api/movies/theatres-shows")
@@ -38,7 +81,7 @@ function NowShowing() {
         if (data?.theatre && Array.isArray(data.theatre)) {
           setMoviecard(
             data.theatre.map((movie) => ({
-              id:   movie.id,
+              id: movie.id,
               name: movie.name,
             }))
           );
@@ -87,11 +130,32 @@ function NowShowing() {
         {moviecard.map((movie) => (
           <div className="movie-card" key={movie.id}>
 
+            
             {/* Poster placeholder (swap src for real poster when API provides it) */}
             <div className="movie-poster">
               <div className="movie-poster-overlay" />
+               {isAdmin && (
+              <div className="admin-actions">
+                {/* <button
+                  className="admin-btn edit"
+                  onClick={() => handleEdit(movie)}
+                >
+                  ✏️ Edit
+                </button> */}
+
+                <button
+                  className="admin-btn delete"
+                  onClick={() => handleDelete(movie.id)}
+                >
+                  🗑 Delete
+                </button>
+              </div>
+            )}
               <span className="movie-poster-badge">Now Playing</span>
+            
+
             </div>
+             
 
             {/* Card body */}
             <div className="movie-card-body">
@@ -129,6 +193,7 @@ function NowShowing() {
 
     </movieApi.Provider>
   );
+
 }
 
 export default NowShowing;

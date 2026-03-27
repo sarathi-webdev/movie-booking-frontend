@@ -23,6 +23,7 @@
   --radius-card:    16px;
   --radius-btn:     10px;
   --transition:     0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
 }
 
 /* ── Base ─────────────────────────────────────── */
@@ -295,7 +296,7 @@
   line-height: 1.3;
   margin: 0;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  /* -webkit-line-clamp: 2; */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -668,11 +669,89 @@
   to   { background-position: -200% 0; }
 }
 
-/* ── Mobile Adjustments ───────────────────────── */
+/* ── Mobile Adjustments ─────────────────────────
 @media (max-width: 600px) {
   .movies-header { padding: 28px 16px 0; }
   .tab-strip { padding: 0 16px; }
   .tab-panel { padding: 20px 16px; }
   .tab-btn { padding: 12px 14px; font-size: 0.82rem; }
   .movies-title { font-size: 2.4rem; }
+}
+
+.admin-badge {
+  color: #ffcc00;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.logout-btn {
+  margin-top: 10px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.admin-add-btn {
+  padding: 10px 20px;
+  background: crimson;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.admin-controls button {
+  margin: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+} */
+/* ===== ADMIN ACTION BUTTONS ===== */
+.admin-actions {
+  display: flex;
+  justify-content:end;
+  gap: 5px;
+  margin-top: 12px;
+}
+
+/* Base button style */
+.admin-btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* ✏️ EDIT BUTTON */
+.admin-btn.edit {
+  background: #0d6efd;
+  color: white;
+}
+
+.admin-btn.edit:hover {
+  background: #0b5ed7;
+  transform: scale(1.05);
+}
+
+/* 🗑 DELETE BUTTON */
+.admin-btn.delete {
+  background: #dc3545;
+  color: white;
+  position: absolute;
+  top: 5px; right: 2px;
+  
+
+}
+
+.admin-btn.delete:hover {
+  background: #bb2d3b;
+  transform: scale(1.05);
+}
+
+/* Disabled state (optional) */
+.admin-btn:disabled {
+  background: #999;
+  cursor: not-allowed;
+  transform: none;
 }

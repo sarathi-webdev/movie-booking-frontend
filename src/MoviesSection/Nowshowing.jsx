@@ -75,6 +75,7 @@ function NowShowing() {
       </div>
     </movieApi.Provider>
   );
+ 
 }
 
 export default NowShowing;

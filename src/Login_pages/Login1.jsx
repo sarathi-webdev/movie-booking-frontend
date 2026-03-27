@@ -43,10 +43,29 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+
     // Validation
     if (!formData.username || !formData.password) {
       setError("Username and password are required");
       return;
+    }
+
+    
+   // ✅ STEP 1: ADMIN LOGIN (FRONTEND ONLY)
+    if (
+      formData.username === "sarathiadmin" &&
+      formData.password === "12345"
+    ) {
+      console.log("✅ Admin login success (frontend)");
+
+      localStorage.setItem("isAdmin", "true");
+      localStorage.setItem("username", formData.username);
+
+      // Optional fake token
+      localStorage.setItem("token", "admin-token");
+
+      navigate("/movie");
+      return; // 🚨 VERY IMPORTANT (stops backend call)
     }
 
     if (action === "Sign Up") {
@@ -64,16 +83,16 @@ function Login() {
     const payload =
       action === "Login"
         ? {
-            username: formData.username,
-            password: formData.password,
-          }
+          username: formData.username,
+          password: formData.password,
+        }
         : {
-            name: formData.name,
-            username: formData.username,
-            email: formData.email,
-            phoneNumber: formData.phoneNumber,
-            password: formData.password,
-          };
+          name: formData.name,
+          username: formData.username,
+          email: formData.email,
+          phoneNumber: formData.phoneNumber,
+          password: formData.password,
+        };
 
     console.log("🔐 Auth request:", action, url);
 
@@ -90,13 +109,18 @@ function Login() {
 
       if (response.ok) {
         setError("");
-        
+
         // Store token
         const token = data.token || data.jwt || data.accessToken;
         if (token) {
           localStorage.setItem("token", token);
           console.log("✅ Token stored successfully");
         }
+
+         // ✅ Normal user → NOT admin
+      localStorage.setItem("isAdmin", "false");
+      localStorage.setItem("username", formData.username);
+        
 
         // Navigate to movies
         navigate("/movie");
@@ -120,7 +144,7 @@ function Login() {
   return (
     <div className="auth-page">
       <div className="auth-card">
-        
+
         {/* Logo Section */}
         <div className="auth-logo">
           <span>🎬</span>
@@ -129,14 +153,14 @@ function Login() {
 
         {/* Subtitle */}
         <p className="auth-subtitle">
-          {action === "Login" 
-            ? "Welcome back! Sign in to continue" 
+          {action === "Login"
+            ? "Welcome back! Sign in to continue"
             : "Create your account to start booking"}
         </p>
 
         {/* Form */}
         <form autoComplete="off" onSubmit={handleSubmit}>
-          
+
           {/* Sign Up Fields */}
           {action === "Sign Up" && (
             <>

@@ -7,6 +7,8 @@ import { useState, useEffect } from "react";
 //  Only JSX classNames / structure updated
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+const isAdmin = localStorage.getItem("isAdmin") === "true";
+
 const THEATRES = [
   "PVR Cinemas",
   "INOX",
@@ -24,6 +26,7 @@ function Selectpre() {
   const [gettingname, setGettingName] = useState(null);
   const [submitting,  setSubmitting]  = useState(false);
   const [hint,        setHint]        = useState("");
+   const [saved,       setSaved]       = useState(false);
 
   const [formData, setFormData] = useState({
     movieId:      id,
@@ -231,14 +234,25 @@ function Selectpre() {
         {/* ── Validation hint ── */}
         {hint && <p className={`pref-hint error`}>{hint}</p>}
 
+
+        {/* ── Success message ── */}
+        {saved && (
+          <div className="pref-success-msg">
+            <span className="pref-success-icon">✓</span>
+            Your preferences have been saved successfully!
+          </div>
+        )}
+ 
         {/* ── Submit ── */}
-        <button
-          className={`pref-submit-btn${submitting ? " is-loading" : ""}`}
-          onClick={handleSubmit}   /* ← original handler */
-          disabled={submitting}
-        >
-          {submitting ? "Saving…" : "Save Preferences"}
-        </button>
+        {!saved && (
+          <button
+            className={`pref-submit-btn${submitting ? " is-loading" : ""}`}
+            onClick={handleSubmit}
+            disabled={submitting}
+          >
+            {submitting ? "Saving…" : "Save Preferences"}
+          </button>
+        )}
 
       </div>
     </div>

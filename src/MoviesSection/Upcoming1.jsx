@@ -1,6 +1,8 @@
 import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const isAdmin = localStorage.getItem("isAdmin") === "true";
+
 export const movie2Api = createContext();
 
 function Upcoming() {
@@ -91,6 +93,23 @@ function Upcoming() {
             <div className="upcoming-poster-thumb">🎞️</div>
 
             <div className="upcoming-info">
+               {isAdmin && (
+              <div className="admin-actions">
+                {/* <button
+                  className="admin-btn edit"
+                  onClick={() => handleEdit(movie)}
+                >
+                  ✏️ Edit
+                </button> */}
+
+                <button
+                  className="admin-btn delete"
+                  onClick={() => handleDelete(movie.id)}
+                >
+                  🗑 Delete
+                </button>
+              </div>
+            )}
               <h3 className="upcoming-title">{movie.title}</h3>
 
               <div className="upcoming-chips">
